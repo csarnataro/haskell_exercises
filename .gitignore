@@ -1,0 +1,4 @@
+.exercism
+.stack-work
+!**/src
+!**/test
