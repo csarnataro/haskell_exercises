@@ -3,7 +3,8 @@ module School (
   add, 
   empty, 
   grade, 
-  sorted) where
+  sorted,
+  makeClass) where
 
 import Data.List (sort, groupBy)
 
@@ -24,7 +25,8 @@ grade gradeNum school = snd $ head $ filter (\x -> fst x == gradeNum) (sorted sc
 sorted :: School -> [(Int, [String])]
 sorted [] = []
 sorted school =
-  concat $ map makeClass
+  concat 
+    $ map makeClass
     $ groupBy (\x y -> fst x == fst y) 
     $ sort school
 
