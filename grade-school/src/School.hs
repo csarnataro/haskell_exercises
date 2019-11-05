@@ -1,15 +1,33 @@
-module School (School, add, empty, grade, sorted) where
+module School (
+  School, 
+  add, 
+  empty, 
+  grade, 
+  sorted) where
+
+import Data.List (sort, groupBy)
+
 
 type School = [(Int, String)]
 
 add :: Int -> String -> School -> School
-add gradeNum student school = school : (gradeNum, student)
+add gradeNum student [] = [(gradeNum, student)]
+add gradeNum student school = (gradeNum, student) : school
 
 empty :: School
 empty = [] -- :: [(Int, String)]
 
 grade :: Int -> School -> [String]
-grade gradeNum school = ["Aimee"] -- error "You need to implement this function."
+grade _ [] = []
+grade gradeNum school = snd $ head $ filter (\x -> fst x == gradeNum) (sorted school)
 
 sorted :: School -> [(Int, [String])]
-sorted school = [(1, ["Aimee"])] -- error "You need to implement this function."
+sorted [] = []
+sorted school =
+  concat $ map makeClass
+    $ groupBy (\x y -> fst x == fst y) 
+    $ sort school
+
+makeClass :: [(Int, String)] -> [(Int, [String])]
+makeClass [] = error "Empty list"
+makeClass (x:xs) = [(fst x, snd x : map snd xs)]
