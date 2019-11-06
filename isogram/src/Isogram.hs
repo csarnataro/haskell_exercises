@@ -1,22 +1,19 @@
 module Isogram (isIsogram) where
 
 import Data.List (sort, group)
-
 import Data.Char
 
-
 isIsogram :: String -> Bool
-isIsogram [] = True
-isIsogram x = do
-  let sanitized = filter (\c -> c /= ' ' && c /= '-' ) x
-  if (length sanitized) <= 1 || (length sanitized) > 26 
-  then
-    False 
-  else
-    (==) 0 
-    $ length
-    $ filter (\g -> (length g) > 1)
-    $ group 
-    $ sort 
-    $ filter (\c -> c /= ' ' && c /= '-' ) 
-    $ map toLower x
+isIsogram x = isSanitizedIsogram $ filter (\c -> c /= ' ' && c /= '-' ) x
+
+isSanitizedIsogram :: String -> Bool
+isSanitizedIsogram x
+  | length x <= 1 = True
+  | length x > 26 = False
+  | otherwise =
+      (==) 0 
+      $ length
+      $ filter (\g -> length g > 1)
+      $ group 
+      $ sort 
+      $ map toLower x

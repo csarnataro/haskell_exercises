@@ -30,6 +30,10 @@ cases = [ Case { description = "empty string"
                , input       = ""
                , expected    = True
                }
+        , Case { description = "1 char string"
+               , input       = "a"
+               , expected    = True
+               }       
         , Case { description = "string (without spaces or hyphens) > 26 chars"
                , input       = "abcde a fghijklmnopqrstuvwxyz"
                , expected    = False
