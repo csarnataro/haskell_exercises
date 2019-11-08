@@ -32,7 +32,7 @@ outside 'A' len = replicate (len - 1) ' '
 outside c len = replicate (len - (c `minus` 'A' + 1)) ' '
 
 listChars :: Char -> [Char]
-listChars d = ((enumFromTo 'A' d) ++ (enumFromThenTo (previousChar d 1)(previousChar d 2)) 'A')
+listChars d = (enumFromTo 'A' d) ++ (enumFromThenTo (previousChar d 1)(previousChar d 2) 'A')
 
 previousChar :: Char -> Int -> Char
 previousChar 'A' _ = 'Z'
