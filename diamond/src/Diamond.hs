@@ -8,7 +8,7 @@ diamond d =
   if (d `elem` ['A'..'Z'])
   then Just 
     $ map 
-      (\x -> line x (length (enumFromTo 'A' d))) 
+      (\x -> line x $ minusA d + 1) 
       $ listChars d
        -- from A to <char> ... and back, without repeating <char>
   else 
